@@ -1,0 +1,10 @@
+main: com.delphinadrealms.Main
+name: CaptureTheFlag
+version: 1.0
+author: Hank
+description: Capture the Flag made by Hank http://ctf.delphinadrealms.com
+commands:
+    ctf:
+      description: Testing command
+      usage: /ctf <args>
+      permission: ctf.ctf
