@@ -1,6 +1,8 @@
 package com.delphinadrealms.Handlers;
 
-import com.delphinadrealms.Main;
+import com.delphinadrealms.CTF;
+import com.delphinadrealms.SQL.SQLManager;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,28 +14,21 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class CommandHandler extends JavaPlugin implements CommandExecutor {
 
+    private final CTF ctf;
 
-    public CommandHandler(Main main) {
+    public CommandHandler(CTF ctf) {
+        this.ctf = ctf;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args ) {
-        if (sender instanceof Player && args.length > 2) {
-            Player player = (Player) sender;
-            player.sendMessage("Hello!");
-            player.sendMessage(args[0] + args[1] + args[2]);
+        if (sender instanceof Player) {
+            Player player = ((Player) sender);
+            player.sendMessage("Your UUID is: " + player.getUniqueId());
+            SQLManager sql = new SQLManager();
+            sql.addUser(player.getUniqueId(),player.getName(),true);
             return true;
-        } else if (args.length == 1) {
-            if (args[0].equalsIgnoreCase("reload")) {
-                Player player = (Player) sender;
-                player.sendMessage("Reloaded config.");
-
-                return true;
-            } else {
-                return false;
-            }
         } else {
-            sender.sendMessage("You must use this command from in-game, sorry.");
             return false;
         }
     }

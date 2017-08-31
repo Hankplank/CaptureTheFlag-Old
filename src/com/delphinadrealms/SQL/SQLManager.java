@@ -1,6 +1,7 @@
 package com.delphinadrealms.SQL;
 
 import java.sql.*;
+import java.util.UUID;
 
 /**
  * Created by henry27 on 8/28/2017.
@@ -17,18 +18,19 @@ public class SQLManager {
         try {
             String url = "jdbc:SQLite:ctf.db";
             connect = DriverManager.getConnection(url);
-            String createTable = "CREATE TABLE IF NOT EXISTS users (userUUID long(36) unique, playername text, enableCTF boolean);";
+            String createTable = "CREATE TABLE IF NOT EXISTS users (userUUID text unique, playername text, enableCTF boolean);";
             Statement createIfDoesntExist = connect.createStatement();
-            ResultSet tableExists = createIfDoesntExist.executeQuery(createTable);
+            createIfDoesntExist.executeQuery(createTable);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void addUser(long userUUID,String playername, boolean enableCTF) {
+    public void addUser(UUID userUUID, String playername, boolean enableCTF) {
         try {
-            String addUser = "INSERT INTO users VALUES (" + userUUID + ", " + playername  + ", " + enableCTF + ");";
+            String addUser = "INSERT INTO users VALUES (\"" + userUUID + "\" , \"" + playername  + "\" , \"" + enableCTF + "\" );";
+            System.out.println("INSERT INTO users VALUES (\"" + userUUID + "\" , \"" + playername  + "\" , \"" + enableCTF + "\" );");
             Statement addUserStatement = connect.createStatement();
             ResultSet rs = addUserStatement.executeQuery(addUser);
             System.out.println("User has been added with the UUID of: " + rs.getLong("userUUID") + " and the name of: " + rs.getString("playername"));

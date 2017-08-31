@@ -1,4 +1,4 @@
-main: com.delphinadrealms.Main
+main: com.delphinadrealms.CTF
 name: CaptureTheFlag
 version: 1.0
 author: Hank
