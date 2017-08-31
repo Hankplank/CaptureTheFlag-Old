@@ -20,7 +20,7 @@ public class SQLManager {
             connect = DriverManager.getConnection(url);
             String createTable = "CREATE TABLE IF NOT EXISTS users (userUUID text unique, playername text, enableCTF boolean);";
             Statement createIfDoesntExist = connect.createStatement();
-            createIfDoesntExist.executeQuery(createTable);
+            createIfDoesntExist.executeUpdate(createTable);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -32,8 +32,8 @@ public class SQLManager {
             String addUser = "INSERT INTO users VALUES (\"" + userUUID + "\" , \"" + playername  + "\" , \"" + enableCTF + "\" );";
             System.out.println("INSERT INTO users VALUES (\"" + userUUID + "\" , \"" + playername  + "\" , \"" + enableCTF + "\" );");
             Statement addUserStatement = connect.createStatement();
-            ResultSet rs = addUserStatement.executeQuery(addUser);
-            System.out.println("User has been added with the UUID of: " + rs.getLong("userUUID") + " and the name of: " + rs.getString("playername"));
+            addUserStatement.executeUpdate(addUser);
+            System.out.println("User has been added with the UUID of: " + userUUID + " and the name of: " + playername);
         } catch (SQLException e) {
 
         }

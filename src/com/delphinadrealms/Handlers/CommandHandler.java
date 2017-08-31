@@ -12,24 +12,20 @@ import org.bukkit.plugin.java.JavaPlugin;
 /**
  * Created by henry27 on 8/28/2017.
  */
-public class CommandHandler extends JavaPlugin implements CommandExecutor {
+public class CommandHandler implements CommandExecutor {
 
-    private final CTF ctf;
-
-    public CommandHandler(CTF ctf) {
-        this.ctf = ctf;
+    public CommandHandler() {
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args ) {
-        if (sender instanceof Player) {
+        //if (sender instanceof Player) {
             Player player = ((Player) sender);
             player.sendMessage("Your UUID is: " + player.getUniqueId());
             SQLManager sql = new SQLManager();
             sql.addUser(player.getUniqueId(),player.getName(),true);
             return true;
-        } else {
-            return false;
-        }
+        //} else {
+        //}
     }
 }

@@ -21,7 +21,7 @@ public class CTF extends JavaPlugin {
     @Override
     public void onEnable() {
         this.saveDefaultConfig();
-        this.getCommand("ctf").setExecutor(new CommandHandler(this));
+        this.getCommand("ctf").setExecutor(new CommandHandler());
         this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(),this);
         sql = new SQLManager();
     }
