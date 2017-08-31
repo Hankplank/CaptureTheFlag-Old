@@ -18,10 +18,7 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        System.out.println("CTF: PLAYER JOINED WITH NAME " + event.getPlayer().getDisplayName());
-        Player player = event.getPlayer();
-        player.sendMessage("Your UUID is: " + event.getPlayer().getUniqueId());
         SQLManager sql = new SQLManager();
-        sql.addUser(event.getPlayer().getUniqueId(),event.getPlayer().getName(),true);
+        sql.addUser(event.getPlayer().getUniqueId(),event.getPlayer().getName());
     }
 }

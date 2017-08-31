@@ -18,7 +18,7 @@ public class SQLManager {
         try {
             String url = "jdbc:SQLite:ctf.db";
             connect = DriverManager.getConnection(url);
-            String createTable = "CREATE TABLE IF NOT EXISTS users (userUUID text unique, playername text, enableCTF boolean);";
+            String createTable = "CREATE TABLE IF NOT EXISTS users (userUUID text unique, playername text, chosenClass text, level integer);";
             Statement createIfDoesntExist = connect.createStatement();
             createIfDoesntExist.executeUpdate(createTable);
 
@@ -27,15 +27,28 @@ public class SQLManager {
         }
     }
 
-    public void addUser(UUID userUUID, String playername, boolean enableCTF) {
+    public void addUser(UUID userUUID, String playername) {
         try {
-            String addUser = "INSERT INTO users VALUES (\"" + userUUID + "\" , \"" + playername  + "\" , \"" + enableCTF + "\" );";
-            System.out.println("INSERT INTO users VALUES (\"" + userUUID + "\" , \"" + playername  + "\" , \"" + enableCTF + "\" );");
+            String addUser = "INSERT INTO users VALUES (\"" + userUUID + "\" , \"" + playername  + "\" , \"knight\" , 1);";
+            System.out.println("INSERT INTO users VALUES (\"" + userUUID + "\" , \"" + playername  + "\" , \"knight\" , 1);");
             Statement addUserStatement = connect.createStatement();
             addUserStatement.executeUpdate(addUser);
             System.out.println("User has been added with the UUID of: " + userUUID + " and the name of: " + playername);
         } catch (SQLException e) {
 
         }
+    }
+
+    public void changeClass(UUID userUUID,String classToChangeTo) {
+        try {
+            String changeClass = "UPDATE USERS SET chosenClass=\"" + classToChangeTo +"\" WHERE userUUID=\"" + userUUID + "\";";
+            System.out.println("UPDATE USERS SET chosenClass=\"" + classToChangeTo +"\" WHERE userUUID=\"" + userUUID + "\";");
+            Statement changeClassStatement = connect.createStatement();
+            changeClassStatement.executeUpdate(changeClass);
+
+        } catch (SQLException e) {
+
+        }
+
     }
 }

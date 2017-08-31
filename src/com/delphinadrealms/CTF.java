@@ -1,13 +1,8 @@
 package com.delphinadrealms;
 
 import com.delphinadrealms.Handlers.CommandHandler;
-import com.delphinadrealms.Handlers.ConfigHandler;
 import com.delphinadrealms.Listeners.PlayerJoinListener;
 import com.delphinadrealms.SQL.SQLManager;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
